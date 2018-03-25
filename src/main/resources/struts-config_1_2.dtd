@@ -92,7 +92,6 @@
 
 
 <!-- ========== Top Level Elements ======================================== -->
-<!ELEMENT hoge (display-name?| description?| data-sources?| form-beans?)>
 
 
 <!-- The "struts-config" element is the root of the configuration file

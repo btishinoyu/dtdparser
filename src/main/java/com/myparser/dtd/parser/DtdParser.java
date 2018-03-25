@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.myparser.dtd.parser.node.Attribute;
 import com.myparser.dtd.parser.node.Element;
@@ -16,6 +18,8 @@ import com.myparser.dtd.parser.node.Tag;
 import com.myparser.dtd.parser.node.TagParser;
 
 public class DtdParser {
+	private static Logger logger = LoggerFactory.getLogger(DtdParser.class);
+	
 	public static List<Node> parse(Source source) {
 		List<Entity> entityList = new ArrayList<>();
 		Map<String, Element> elementMap = new LinkedHashMap<>();
@@ -25,6 +29,8 @@ public class DtdParser {
 		for (Node node : nodeList) {
 			if (node instanceof Tag) {
 				Tag tag = (Tag) node;
+				logger.debug(tag.print());
+				
 				switch (tag.getTagName().toUpperCase()) {
 				case "!ENTITY":
 					Entity entity = parseEntity(tag);
@@ -52,6 +58,7 @@ public class DtdParser {
 			for (String childElmName : elm.getChildNameList()) {
 				Element childElm = elementMap.get(childElmName);
 				if (childElm != null) {
+					childElm.setChild(true);
 					elm.getChildElmentList().add(childElm);
 				}
 			}

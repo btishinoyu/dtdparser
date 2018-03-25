@@ -22,4 +22,9 @@ public class Attribute implements Node {
 	public String getData() {
 		return data;
 	}
+
+	@Override
+	public String print() {
+		return String.format("(%s:%s)", attrName, data);
+	}
 }

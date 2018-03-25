@@ -16,4 +16,9 @@ public class Entity implements Node {
 	public String getContents() {
 		return contents;
 	}
+
+	@Override
+	public String print() {
+		return String.format("Entity\t\t%s\t%s", contents, name);
+	}
 }

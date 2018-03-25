@@ -28,14 +28,14 @@ public class TagParser {
 							// コメントタグ終了
 							if (sb.lastIndexOf("-->") != -1) {
 								startTag = false;
-								sb =  new StringBuilder();
+								sb = new StringBuilder();
 							}
 						}
 						// テキスト内のタグ終了文字ではない場合
 						else if (startText == Character.MIN_VALUE) {
 							startTag = false;
 							Tag tag = createTag(sb.substring(1, sb.length() - 1));
-							sb =  new StringBuilder();
+							sb = new StringBuilder();
 							nodeList.add(tag);
 						}
 						// テキスト内のタグ終了文字の場合
@@ -45,20 +45,20 @@ public class TagParser {
 						break;
 					case '"':
 					case '\'':
-						// テキスト開始の場合
-						if (startText == Character.MIN_VALUE) {
-							startText = c;
-						}
-						else {
-							// テキスト終了
-							if (startText == c) {
-								startText = Character.MIN_VALUE;
+						if (!isComment) {
+							// テキスト開始の場合
+							if (startText == Character.MIN_VALUE) {
+								startText = c;
+							} else {
+								// テキスト終了
+								if (startText == c) {
+									startText = Character.MIN_VALUE;
+								}
 							}
 						}
-					break;
+						break;
 					}
-				}
-				else {
+				} else {
 					if (!isComment && (c == '<')) {
 						startTag = true;
 						// タグ外に文字がある場合
@@ -85,7 +85,7 @@ public class TagParser {
 			idx = contents.length();
 		}
 		String name = contents.substring(0, idx);
-		
+
 		return new Tag(contents, name);
 	}
 }

@@ -10,4 +10,9 @@ public class Text implements Node {
 	public String getText() {
 		return text;
 	}
+
+	@Override
+	public String print() {
+		return String.format("%s", text);
+	}
 }

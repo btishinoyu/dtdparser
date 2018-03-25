@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.myparser.dtd.parser.DtdParser;
 import com.myparser.dtd.parser.Source;
@@ -19,8 +20,12 @@ public class App {
 		Source source = new Source(src);
 		
 		List<Node> nodeList = DtdParser.parse(source);
-		
-		System.out.println("");
+		for (Node node : nodeList) {
+			String text = node.print();
+			if (StringUtils.isNotEmpty(text)) {
+				System.out.println(text);
+			}
+		}
 	}
 
 }

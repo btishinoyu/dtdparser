@@ -16,4 +16,9 @@ public class Tag implements Node {
 	public String getTagName() {
 		return tagName;
 	}
+
+	@Override
+	public String print() {
+		return String.format("%s\t%s", tagName, contents);
+	}
 }
